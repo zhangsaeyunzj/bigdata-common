@@ -1,0 +1,76 @@
+def artifactId = 'bigdata-common'
+
+group 'com.nuonuo'
+version '1.0.3'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+gradle.ext {
+    mavenUrl = "http://192.168.210.60:8081/nexus/content/repositories/nuonuo-releases"
+    mavenDevUrl = "http://192.168.210.60:8081/nexus/content/repositories/nuonuo-snapshots"
+    mavenUserName = "nn_snapshot"
+    mavenPwd = "nuonuo@123"
+
+//    mavenUserName = "admin"
+//    mavenPwd = "www@hello567"
+
+    vendor = "aisino"
+
+    // 开发版本为true，提交到maven快照仓库；
+    // 正式发布设置为true，提交到maven发布；
+    // 提交命令：gradle upload
+    isSnapshot = true
+}
+
+repositories {
+    maven {
+        url "http://192.168.210.60:8081/nexus/content/groups/public"
+    }
+
+    mavenCentral()
+}
+
+dependencies {
+
+    compile(
+            'org.apache.hbase:hbase-client:0.98.18-hadoop2',
+            'com.alibaba:fastjson:1.2.11'
+    )
+
+    testCompile(
+            'junit:junit:4.12',
+            'com.alibaba:fastjson:1.2.11'
+    )
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+
+
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            snapshotRepository(url: gradle.mavenDevUrl) {
+                authentication(userName: gradle.mavenUserName, password: gradle.mavenPwd)
+            }
+            repository(url: gradle.mavenUrl) {
+                authentication(userName: gradle.mavenUserName, password: gradle.mavenPwd)
+            }
+
+            if (gradle.isSnapshot) {
+                pom.version = "$project.version-SNAPSHOT"
+            } else {
+                pom.version = "$project.version"
+            }
+            pom.artifactId = "$artifactId"
+            pom.groupId = "$project.group"
+        }
+    }
+}
+

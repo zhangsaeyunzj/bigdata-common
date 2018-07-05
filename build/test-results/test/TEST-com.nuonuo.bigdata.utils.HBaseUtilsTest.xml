@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.nuonuo.bigdata.utils.HBaseUtilsTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-09-21T06:09:20" hostname="zhangbl-PC" time="18.871">
+  <properties/>
+  <testcase name="batchPutTest" classname="com.nuonuo.bigdata.utils.HBaseUtilsTest" time="18.818"/>
+  <testcase name="putTest" classname="com.nuonuo.bigdata.utils.HBaseUtilsTest" time="0.017"/>
+  <testcase name="getTest" classname="com.nuonuo.bigdata.utils.HBaseUtilsTest" time="0.015"/>
+  <testcase name="deleteRowTest" classname="com.nuonuo.bigdata.utils.HBaseUtilsTest" time="0.02"/>
+  <system-out><![CDATA[init
+init
+init
+{billFlag=1, buyerAccount=dfasdf, notaxAmountSum=234234.334, invoiceKind=s, invoiceDate=2017-09-21, invoiceCode=330902, invoiceNum=999999999}
+init
+]]></system-out>
+  <system-err><![CDATA[log4j:WARN No appenders could be found for logger (org.apache.hadoop.security.Groups).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+]]></system-err>
+</testsuite>
